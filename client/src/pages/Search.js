@@ -3,7 +3,8 @@ import API from '../utils/API';
 import BtnView from '../components/BtnView';
 import BtnSave from '../components/BtnSave';
 import { List, ListItem } from '../components/List';
-import { Input, TextArea, FormBtn } from '../components/Form';
+import { Input, FormBtn } from '../components/Form';
+// import { Input, TextArea, FormBtn } from '../components/Form';
 
 //User can search for books via the Google Books API and render them here. User has the option to 'View' a book, bringing them to the book on Google Books, or 'Save' a book, saving it to the Mongo database.
 
@@ -32,6 +33,11 @@ class Search extends Component {
     });
   };
 
+  testFunction = event => {
+    // const { name, value } = event.target;
+    console.log(event.target);
+  };
+
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.title || this.state.author || this.state.subject) {
@@ -42,39 +48,42 @@ class Search extends Component {
       })
         .then(res => {
           let books = [];
-          res.data.items.forEach((element, i) => {
-            let id = '', title = '', authors = '', booklink = '', bookimg = '', synopsis = '';
-            if (element.id) {
-              if ('etag' in element) {
-                id = element.id + element.etag;
+          res.data.items.forEach((book, i) => {
+            let id = ''
+            let title = ''
+            let authors = ''
+            let description = ''
+            let link = ''
+            let thumbnail = ''
+            if (book.id) {
+              id = book.id;
+            }
+            if (book.volumeInfo.title) {
+              title = book.volumeInfo.title;
+            }
+            if (book.volumeInfo.authors) {
+              authors = book.volumeInfo.authors;
+              // authors = ' by ' + (book.volumeInfo.authors).join(', ');
+            }
+            if (book.volumeInfo.description) {
+              description = book.volumeInfo.description;
+            }
+            if (book.volumeInfo.previewLink) {
+              link = book.volumeInfo.previewLink;
+            }
+            if ('imageLinks' in book.volumeInfo) {
+              if ('thumbnail' in book.volumeInfo.imageLinks) {
+                thumbnail = book.volumeInfo.imageLinks.thumbnail;
               }
-            }
-            if (element.volumeInfo.title) {
-              title = element.volumeInfo.title;
-            }
-            if (element.volumeInfo.authors) {
-              authors = ' by ' + (element.volumeInfo.authors).join(', ');
-            }
-            if (element.volumeInfo.infoLink) {
-              booklink = element.volumeInfo.infoLink;
-            }
-            if ('imageLinks' in element.volumeInfo) {
-              if ('smallThumbnail' in element.volumeInfo.imageLinks) {
-                bookimg = element.volumeInfo.imageLinks.smallThumbnail;
-              }
-            }
-            if (element.volumeInfo.description) {
-              synopsis = element.volumeInfo.description;
             }
             books.push({
               id,
               title,
               authors,
-              booklink,
-              bookimg,
-              synopsis
+              link,
+              thumbnail,
+              description
             });
-
           });
 
           this.setState({
@@ -83,8 +92,7 @@ class Search extends Component {
             author: '',
             subject: ''
           });
-        }
-        )
+        })
         .catch(err => console.log(err));
     }
   };
@@ -122,14 +130,13 @@ class Search extends Component {
         {this.state.books.length ? (
           <List>
             {this.state.books.map(book => (
-              <ListItem key={book._id}>
-                <a href={'/books/' + book._id}>
-                  <strong>
-                    {book.title} by {book.author}
-                  </strong>
-                </a>
-                <BtnView />
-                <BtnSave />
+              <ListItem key={book.id}>
+                <>
+                  <strong>{book.title}</strong> <strong>by {book.authors}</strong><br />
+                  {/* <a href={'/books/' + book._id}>
+                    <strong>{book.title}</strong></a> <strong>by {book.authors}</strong><br /> */}
+                  {book.description}<br /></ >
+                <a href={book.link} target='_blank'>View</a> <BtnSave />
               </ListItem>
             ))}
           </List>
