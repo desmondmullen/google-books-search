@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
-import Jumbotron from '../components/Jumbotron';
 import API from '../utils/API';
-import DeleteBtn from '../components/DeleteBtn';
-import { Col, Row, Container } from '../components/Grid';
+import BtnView from '../components/BtnView';
+import BtnDelete from '../components/BtnDelete';
 import { List, ListItem } from '../components/List';
 import { Input, TextArea, FormBtn } from '../components/Form';
 
 //Renders all books saved to the Mongo database. User has an option to 'View' the book, bringing them to the book on Google Books, or 'Delete' a book, removing it from the Mongo database.
 
-class Books extends Component {
+class Saved extends Component {
   state = {
     books: []
   };
 
-  componentDidMount() {
+  componentDidMount () {
     this.loadBooks();
   }
 
@@ -23,7 +22,7 @@ class Books extends Component {
       .catch(err => console.log(err));
   };
 
-  render() {
+  render () {
     return (
       <>
         <h1>Saved</h1>
@@ -37,7 +36,8 @@ class Books extends Component {
                       {book.title} by {book.author}
                     </strong>
                   </a>
-                  <DeleteBtn />
+                  <BtnView />
+                  <BtnDelete />
                 </ListItem>
               ))}
             </List>
@@ -50,4 +50,4 @@ class Books extends Component {
   }
 }
 
-export default Books;
+export default Saved;
