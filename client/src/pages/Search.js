@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import API from '../utils/API';
 // import BtnView from '../components/BtnView';
 import BtnSave from '../components/BtnSave';
+import BtnDelete from '../components/BtnDelete';
 import { List, ListItem } from '../components/List';
 import { Input, FormBtn } from '../components/Form';
 // import { Input, TextArea, FormBtn } from '../components/Form';
@@ -20,6 +21,20 @@ class Search extends Component {
   };
 
   componentDidMount () {
+    this.getSavedBookIds();
+  }
+
+  getSavedBookIds = () => {
+    API.getBooks()
+      .then(res => {
+        let savedBookIds = [];
+        res.data.forEach((book, i) => {
+          savedBookIds.push(book.id)
+        })
+        console.log(savedBookIds);
+        this.setState({ savedBookIds: savedBookIds })
+      })
+      .catch(err => console.log(err));
   }
 
   saveBook = event => {
@@ -31,6 +46,14 @@ class Search extends Component {
   getBook = event => {
     API.getBook(event.target.getAttribute('data-id'))
       .then(res => this.setState({ books: res.data }))
+      .catch(err => console.log(err));
+  }
+
+  deleteBook = (event) => {
+    API.deleteBook(event.target.getAttribute('data-id'))
+      .then(res => {
+        // this.loadBooks()
+      })
       .catch(err => console.log(err));
   }
 
@@ -58,6 +81,7 @@ class Search extends Component {
             let description = ''
             let previewLink = ''
             let thumbnail = ''
+            let saved = false
             if (book.id) {
               id = book.id;
             }
@@ -81,13 +105,15 @@ class Search extends Component {
                 thumbnail = book.volumeInfo.imageLinks.thumbnail;
               }
             }
+            if (this.state.savedBookIds.includes(book.id)) { saved = true }
             books.push({
               id,
               title,
               authors,
+              description,
               previewLink,
               thumbnail,
-              description
+              saved
             });
           });
 
@@ -137,7 +163,7 @@ class Search extends Component {
             {this.state.books.map(book => (
               <ListItem key={book.id}>
                 <>
-                  <section className='book-buttons'><a href={book.previewLink} target='_blank' rel='noopener noreferrer'>View</a> <BtnSave data-id={book.id} onClick={this.saveBook} /></section>
+                  <section className='book-buttons'><a href={book.previewLink} target='_blank' rel='noopener noreferrer'>View</a> {book.saved ? <BtnDelete data-id={book.id} onClick={this.deleteBook} /> : <BtnSave data-id={book.id} onClick={this.saveBook} />}</section>
                   <strong>{book.title}</strong> <strong>by {book.authors}</strong><br /><div><img className='book-thumbnail' src={book.thumbnail} alt='' /><section className='book-description'>{book.description}</section></div><br /><hr /></ >
               </ListItem>
             ))}

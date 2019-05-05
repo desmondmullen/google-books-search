@@ -6,7 +6,7 @@ import '../components.css'
 function BtnSave (props) {
   return (
     <span className='btn-save' {...props} role='button' tabIndex='0'>
-      Save
+      Add to Saved
     </span>
   )
 }

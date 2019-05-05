@@ -6,7 +6,7 @@ import '../components.css'
 function BtnDelete (props) {
   return (
     <span className='btn-delete' {...props} role='button' tabIndex='0'>
-      Delete
+      Remove from Saved
     </span>
   )
 }
