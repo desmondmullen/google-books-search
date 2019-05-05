@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import API from '../utils/API';
-// import BtnView from '../components/BtnView';
 import BtnSave from '../components/BtnSave';
 import BtnDelete from '../components/BtnDelete';
 import { List, ListItem } from '../components/List';
@@ -38,6 +37,7 @@ class Search extends Component {
   }
 
   saveBook = event => {
+    console.log(event.target);
     API.saveBook(event.target.getAttribute('data-id'))
     // .then(res => this.setState({ books: res.data }))
     // .catch(err => console.log(err));
@@ -50,8 +50,26 @@ class Search extends Component {
   }
 
   deleteBook = (event) => {
-    API.deleteBook(event.target.getAttribute('data-id'))
+    const theId = event.target.getAttribute('data-id')
+    API.deleteBook(theId)
       .then(res => {
+        let books = this.state.books;
+        let obj = books.find((book, i) => {
+          if (book.id === theId) {
+            books[i] = { ...books[i], saved: false };
+            this.setState({ books })
+            console.log(obj);
+            // console.log(this.state.books[i]);
+          }
+        });
+        /*
+          let obj = books.find((book, i) => {
+            if (book.id === 'pwMEDgAAQBAJ') {
+              books[i] = { ...books[i], id: 'test' };
+              console.log(books[i]); // stop searching
+            }
+          });
+        */
         // this.loadBooks()
       })
       .catch(err => console.log(err));
@@ -116,7 +134,6 @@ class Search extends Component {
               saved
             });
           });
-
           this.setState({
             books,
             title: '',

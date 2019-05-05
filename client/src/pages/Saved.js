@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import API from '../utils/API';
-import BtnView from '../components/BtnView';
 import BtnDelete from '../components/BtnDelete';
 import { List, ListItem } from '../components/List';
 // import { Input, TextArea, FormBtn } from '../components/Form';
