@@ -28,9 +28,11 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     remove: function (req, res) {
+        console.log('in booksController ' + req.params.id);
         db.Book
-            .findById({ _id: req.params.id })
-            .then(dbModel => dbModel.remove())
+            .findOneAndRemove({ id: req.params.id })
+            // .findById({ _id: req.params.id })
+            // .then(dbModel => dbModel.remove())
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     }

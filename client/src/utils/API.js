@@ -13,7 +13,32 @@ export default {
   },
   // Saves a book to the database
   saveBook: function (id) {
-    return axios.post('/api/books/' + id)
+    let theUrl = 'https://www.googleapis.com/books/v1/volumes/' + id
+    axios.get(theUrl)
+      .then(function (response) {
+        const id = response.data.id;
+        const { title, authors, description, previewLink } = response.data.volumeInfo;
+        const thumbnail = response.data.volumeInfo.imageLinks.thumbnail;
+        // console.log(response.data);
+        console.log(id, title, authors, description, previewLink, thumbnail);
+        axios.post('/api/books', {
+          id,
+          title,
+          authors,
+          description,
+          previewLink,
+          thumbnail
+        });
+        // handle success
+        // console.log(response.data);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
   },
   // Deletes the book with the given id
   deleteBook: function (id) {

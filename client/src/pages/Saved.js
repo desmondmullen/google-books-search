@@ -22,10 +22,33 @@ class Saved extends Component {
       .catch(err => console.log(err));
   };
 
+  deleteBook = (event) => {
+    API.deleteBook(event.target.getAttribute('data-id'))
+      .then(res => {
+        this.loadBooks()
+      })
+      .catch(err => console.log(err));
+  }
+
   render () {
     return (
       <>
         <h1>Saved</h1>
+        {this.state.books.length ? (
+          <List>
+            {this.state.books.map(book => (
+              <ListItem key={book.id}>
+                <>
+                  <section className='book-buttons'><a href={book.previewLink} target='_blank' rel='noopener noreferrer'>View</a> <BtnDelete data-id={book.id} onClick={this.deleteBook} /></section>
+                  <strong>{book.title}</strong> <strong>by {book.authors}</strong><br /><div><img className='book-thumbnail' src={book.thumbnail} alt='' /><section className='book-description'>{book.description}</section></div><br /><hr /></ >
+              </ListItem>
+            ))}
+          </List>
+        ) : (
+            <h3>No Results to Display</h3>
+          )}
+
+        {/* <h1>Saved</h1>
         {
           this.state.books.length ? (
             <List>
@@ -44,7 +67,7 @@ class Saved extends Component {
           ) : (
               <h3>No Results to Display</h3>
             )
-        }
+        } */}
       </ >
     );
   }

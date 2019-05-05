@@ -13,37 +13,32 @@ import '../App.css'
 class Search extends Component {
   state = {
     books: [],
+    savedBookIds: [],
     title: '',
     author: '',
     subject: ''
   };
 
   componentDidMount () {
-    this.loadBooks();
   }
-
-  loadBooks = () => {
-    API.getBooks()
-      .then(res => this.setState({ books: res.data }))
-      .catch(err => console.log('getBooks gave error: ' + err));
-  };
 
   saveBook = event => {
     API.saveBook(event.target.getAttribute('data-id'))
+    // .then(res => this.setState({ books: res.data }))
+    // .catch(err => console.log(err));
+  };
+
+  getBook = event => {
+    API.getBook(event.target.getAttribute('data-id'))
       .then(res => this.setState({ books: res.data }))
       .catch(err => console.log(err));
-  };
+  }
 
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
       [name]: value
     });
-  };
-
-  testFunction = event => {
-    // const { name, value } = event.target;
-    console.log(event.target.getAttribute('data-id'));
   };
 
   handleFormSubmit = event => {
@@ -61,7 +56,7 @@ class Search extends Component {
             let title = ''
             let authors = ''
             let description = ''
-            let link = ''
+            let previewLink = ''
             let thumbnail = ''
             if (book.id) {
               id = book.id;
@@ -79,7 +74,7 @@ class Search extends Component {
               description = book.volumeInfo.description;
             }
             if (book.volumeInfo.previewLink) {
-              link = book.volumeInfo.previewLink;
+              previewLink = book.volumeInfo.previewLink;
             }
             if ('imageLinks' in book.volumeInfo) {
               if ('thumbnail' in book.volumeInfo.imageLinks) {
@@ -90,7 +85,7 @@ class Search extends Component {
               id,
               title,
               authors,
-              link,
+              previewLink,
               thumbnail,
               description
             });
@@ -142,7 +137,7 @@ class Search extends Component {
             {this.state.books.map(book => (
               <ListItem key={book.id}>
                 <>
-                  <section className='book-buttons'><a href={book.link} target='_blank' rel='noopener noreferrer'>View</a> <BtnSave data-id={book.id} onClick={this.saveBook} /></section>
+                  <section className='book-buttons'><a href={book.previewLink} target='_blank' rel='noopener noreferrer'>View</a> <BtnSave data-id={book.id} onClick={this.saveBook} /></section>
                   <strong>{book.title}</strong> <strong>by {book.authors}</strong><br /><div><img className='book-thumbnail' src={book.thumbnail} alt='' /><section className='book-description'>{book.description}</section></div><br /><hr /></ >
               </ListItem>
             ))}
