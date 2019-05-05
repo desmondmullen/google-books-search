@@ -38,35 +38,13 @@ class Saved extends Component {
             {this.state.books.map(book => (
               <ListItem key={book.id}>
                 <>
-                  <section className='book-buttons'><a href={book.previewLink} target='_blank' rel='noopener noreferrer'>View</a> <BtnDelete data-id={book.id} onClick={this.deleteBook} /></section>
-                  <strong>{book.title}</strong> <strong>by {book.authors}</strong><br /><div><img className='book-thumbnail' src={book.thumbnail} alt='' /><section className='book-description'>{book.description}</section></div><br /><hr /></ >
+                  <div className='book-topbar'><section className='book-buttons'><BtnDelete data-id={book.id} onClick={this.deleteBook} /> <a href={book.previewLink} className='btn' target='_blank' rel='noopener noreferrer'>View</a></section><section className='book-title'>{book.title}</section><section className='book-author'>by {book.authors}</section></div><div><img className='book-thumbnail' src={book.thumbnail} alt='' /><section className='book-description'>{book.description}</section></div></ >
               </ListItem>
             ))}
           </List>
         ) : (
             <h3>No Results to Display</h3>
           )}
-
-        {/* <h1>Saved</h1>
-        {
-          this.state.books.length ? (
-            <List>
-              {this.state.books.map(book => (
-                <ListItem key={book._id}>
-                  <a href={'/books/' + book._id}>
-                    <strong>
-                      {book.title} by {book.author}
-                    </strong>
-                  </a>
-                  <BtnView />
-                  <BtnDelete />
-                </ListItem>
-              ))}
-            </List>
-          ) : (
-              <h3>No Results to Display</h3>
-            )
-        } */}
       </ >
     );
   }

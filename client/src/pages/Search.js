@@ -178,8 +178,8 @@ class Search extends Component {
             {this.state.books.map(book => (
               <ListItem key={book.id}>
                 <>
-                  <section className='book-buttons'><a href={book.previewLink} target='_blank' rel='noopener noreferrer'>View</a> {book.saved ? <BtnDelete data-id={book.id} onClick={this.deleteBook} /> : <BtnSave data-id={book.id} onClick={this.saveBook} />}</section>
-                  <strong>{book.title}</strong> <strong>by {book.authors}</strong><br /><div><img className='book-thumbnail' src={book.thumbnail} alt='' /><section className='book-description'>{book.description}</section></div><br /><hr /></ >
+                  <div className='book-topbar'><section className='book-buttons'>{book.saved ? <BtnDelete data-id={book.id} onClick={this.deleteBook} /> : <BtnSave data-id={book.id} onClick={this.saveBook} />} <a href={book.previewLink} className='btn' target='_blank' rel='noopener noreferrer'>View</a></section>
+                    <section className='book-title'>{book.title}</section><section className='book-author'>by {book.authors}</section></div><div><img className='book-thumbnail' src={book.thumbnail} alt='' /><section className='book-description'>{book.description}</section></div></ >
               </ListItem>
             ))}
           </List>
