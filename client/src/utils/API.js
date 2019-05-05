@@ -20,8 +20,8 @@ export default {
         const { title, authors, description, previewLink } = response.data.volumeInfo;
         const thumbnail = response.data.volumeInfo.imageLinks.thumbnail;
         // console.log(response.data);
-        console.log(id, title, authors, description, previewLink, thumbnail);
-        axios.post('/api/books', {
+        // console.log(id, title, authors, description, previewLink, thumbnail);
+        return axios.post('/api/books', {
           id,
           title,
           authors,
@@ -36,9 +36,9 @@ export default {
         // handle error
         console.log(error);
       })
-      .then(function () {
-        // always executed
-      });
+    // .then(function () {
+    //   // always executed
+    // });
   },
   // Deletes the book with the given id
   deleteBook: function (id) {
@@ -60,7 +60,7 @@ export default {
       if (theQuery) { theQuery += '+' };
       theQuery += 'subject:' + theSubject.split(' ').join('+');
     }
-    console.log(theQuery);
+    // console.log(theQuery);
     return axios.get(baseUrl + theQuery + apiKey)
   }
 }

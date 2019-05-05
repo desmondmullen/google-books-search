@@ -36,12 +36,14 @@ class Search extends Component {
       .catch(err => console.log(err));
   }
 
-  saveBook = event => {
-    console.log(event.target);
-    API.saveBook(event.target.getAttribute('data-id'))
-    // .then(res => this.setState({ books: res.data }))
+  saveBook = (event) => {
+    const theId = event.target.getAttribute('data-id')
+    API.saveBook(theId)
+    // .then(res => {
+    this.updateSaved(theId, true)
+    // })
     // .catch(err => console.log(err));
-  };
+  }
 
   getBook = event => {
     API.getBook(event.target.getAttribute('data-id'))
@@ -53,26 +55,22 @@ class Search extends Component {
     const theId = event.target.getAttribute('data-id')
     API.deleteBook(theId)
       .then(res => {
-        let books = this.state.books;
-        let obj = books.find((book, i) => {
-          if (book.id === theId) {
-            books[i] = { ...books[i], saved: false };
-            this.setState({ books })
-            console.log(obj);
-            // console.log(this.state.books[i]);
-          }
-        });
-        /*
-          let obj = books.find((book, i) => {
-            if (book.id === 'pwMEDgAAQBAJ') {
-              books[i] = { ...books[i], id: 'test' };
-              console.log(books[i]); // stop searching
-            }
-          });
-        */
-        // this.loadBooks()
+        this.updateSaved(theId, false)
       })
       .catch(err => console.log(err));
+  }
+
+  updateSaved = (theId, saved) => {
+    let books = this.state.books;
+    for (let i = 0; i < books.length; i++) {
+      console.log(i);
+      if (books[i].id === theId) {
+        books[i] = { ...books[i], saved: saved };
+        this.setState({ books })
+        console.log(this.state.books[i]);
+        break;
+      }
+    }
   }
 
   handleInputChange = event => {
