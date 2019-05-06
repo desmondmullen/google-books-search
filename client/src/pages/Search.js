@@ -57,11 +57,9 @@ class Search extends Component {
   updateSaved = (theId, saved) => {
     let books = this.state.books;
     for (let i = 0; i < books.length; i++) {
-      console.log(i);
       if (books[i].id === theId) {
         books[i] = { ...books[i], saved: saved };
         this.setState({ books })
-        console.log(this.state.books[i]);
         break;
       }
     }
@@ -141,6 +139,8 @@ class Search extends Component {
   render () {
     return (
       <>
+        <br />
+        <SaveNotice />
         <form>
           <div className='search-bar'><div className='search-fields'>
             Title: <Input
@@ -163,7 +163,6 @@ class Search extends Component {
               placeholder='Subject'
             /></div><FormBtn onClick={this.handleFormSubmit}>Search</FormBtn></div>
         </form>
-        <SaveNotice />
         {this.state.books.length ? (
           <List>
             {this.state.books.map(book => (

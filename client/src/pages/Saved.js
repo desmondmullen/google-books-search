@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import API from '../utils/API';
 import BtnDelete from '../components/BtnDelete';
+import SaveNotice from '../components/SaveNotice';
 import { List, ListItem } from '../components/List';
 // import { Input, TextArea, FormBtn } from '../components/Form';
 
@@ -32,7 +33,8 @@ class Saved extends Component {
   render () {
     return (
       <>
-        {/* <h1>Saved</h1> */}
+        <br />
+        <SaveNotice />
         {this.state.books.length ? (
           <List>
             {this.state.books.map(book => (

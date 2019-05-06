@@ -3,7 +3,7 @@ import React from 'react';
 function SaveNotice () {
     return (
         <>
-            <div id='save-notice'></div>
+            <div id='save-notice'>&nbsp;</div>
         </ >
     );
 }

@@ -26,5 +26,5 @@ app.use(routes);
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooksearch");
 
 server.listen(PORT, function () {
-  console.log(`🌎 ==> socket listening on port ${PORT}`);
+  console.log(`🌎 ==> on port ${PORT}`);
 });

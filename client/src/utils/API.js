@@ -7,15 +7,12 @@ const baseUrl = 'https://www.googleapis.com/books/v1/volumes?q='
 const apiKey = '&key=AIzaSyBnwnrcNwOsL8hcsCgR-0LE-pyvCDE0s5I'
 
 export default {
-  // Gets all books
   getBooks: function () {
     return axios.get('/api/books')
   },
-  // Gets the book with the given id
   getBook: function (id) {
     return axios.get('/api/books/' + id)
   },
-  // Saves a book to the database
   saveBook: function (id) {
     let theUrl = 'https://www.googleapis.com/books/v1/volumes/' + id
     axios.get(theUrl)
@@ -32,18 +29,11 @@ export default {
           previewLink,
           thumbnail
         });
-        // handle success
-        // console.log(response.data);
       })
       .catch(function (error) {
-        // handle error
         console.log(error);
       })
-    // .then(function () {
-    //   // always executed
-    // });
   },
-  // Deletes the book with the given id
   deleteBook: function (id) {
     return axios.delete('/api/books/' + id)
   },
@@ -63,7 +53,6 @@ export default {
       if (theQuery) { theQuery += '+' };
       theQuery += 'subject:' + theSubject.split(' ').join('+');
     }
-    // console.log(theQuery);
     return axios.get(baseUrl + theQuery + apiKey)
   }
 }
