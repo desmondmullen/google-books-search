@@ -2,13 +2,10 @@ import React, { Component } from 'react';
 import API from '../utils/API';
 import BtnSave from '../components/BtnSave';
 import BtnDelete from '../components/BtnDelete';
+import SaveNotice from '../components/SaveNotice';
 import { List, ListItem } from '../components/List';
 import { Input, FormBtn } from '../components/Form';
-// import { Input, TextArea, FormBtn } from '../components/Form';
 import '../App.css'
-
-
-//User can search for books via the Google Books API and render them here. User has the option to 'View' a book, bringing them to the book on Google Books, or 'Save' a book, saving it to the Mongo database.
 
 class Search extends Component {
   state = {
@@ -39,10 +36,7 @@ class Search extends Component {
   saveBook = (event) => {
     const theId = event.target.getAttribute('data-id')
     API.saveBook(theId)
-    // .then(res => {
     this.updateSaved(theId, true)
-    // })
-    // .catch(err => console.log(err));
   }
 
   getBook = event => {
@@ -147,32 +141,29 @@ class Search extends Component {
   render () {
     return (
       <>
-        <h1>Book Search</h1>
         <form>
-          <Input
-            value={this.state.title}
-            onChange={this.handleInputChange}
-            onSubmit={this.handleFormSubmit}
-            name='title'
-            placeholder='Title'
-          />
-          <Input
-            value={this.state.author}
-            onChange={this.handleInputChange}
-            onSubmit={this.handleFormSubmit}
-            name='author'
-            placeholder='Author'
-          />
-          <Input
-            value={this.state.subject}
-            onChange={this.handleInputChange}
-            onSubmit={this.handleFormSubmit}
-            name='subject'
-            placeholder='Subject'
-          />
-          <FormBtn onClick={this.handleFormSubmit}>Search</FormBtn>
+          <div className='search-bar'><div className='search-fields'>
+            Title: <Input
+              value={this.state.title}
+              onChange={this.handleInputChange}
+              onSubmit={this.handleFormSubmit}
+              name='title'
+              placeholder='Title'
+            /> Author: <Input
+              value={this.state.author}
+              onChange={this.handleInputChange}
+              onSubmit={this.handleFormSubmit}
+              name='author'
+              placeholder='Author'
+            /> Subject: <Input
+              value={this.state.subject}
+              onChange={this.handleInputChange}
+              onSubmit={this.handleFormSubmit}
+              name='subject'
+              placeholder='Subject'
+            /></div><FormBtn onClick={this.handleFormSubmit}>Search</FormBtn></div>
         </form>
-        <h1>Results</h1>
+        <SaveNotice />
         {this.state.books.length ? (
           <List>
             {this.state.books.map(book => (

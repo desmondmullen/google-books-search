@@ -1,32 +1,25 @@
-/* .App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
+.navbar {
+  font-size: xx-large;
+  padding: 1%;
   color: white;
+  background-color: gray;
 }
 
-.App-intro {
-  font-size: large;
+.nav-title {
+  /* background-color: blue; */
+  font-weight: bold;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.nav-link {
+  color: white;
+  /* background-color: green; */
+  text-decoration: none;
 }
- */
+
+h1 {
+  /* margin: 2%; */
+  /* text-align: center; */
+}
 
 .book-topbar {
   background-color: gray;
@@ -83,13 +76,49 @@
   text-decoration: none;
 }
 
+.search-bar {
+  margin: 2%;
+  background-color: lightblue;
+  padding: 1% 0 2% 0;
+  text-align: center;
+}
+
+.btn-search {
+  /* display: inline; */
+  padding: 0.5% 1%;
+  /* float: right; */
+}
+
+.search-fields {
+  /* float: left; */
+  display: inline;
+  font-size: x-large;
+  margin: 0;
+}
+
+.search-fields input {
+  font-size: large;
+  width: 20%;
+  margin: 0 1% 0 0;
+  /* display: inline; */
+}
+
+.search-fields button {
+  /* display: inline-block;
+  color: green; */
+}
+
+#save-notice {
+  text-align: center;
+}
+
 .btn-delete {
   color: #e74944;
 }
 
 .list {
   background-color: lightgray;
-  margin: 0 5%;
+  margin: 2%;
 }
 
 .list-ul {

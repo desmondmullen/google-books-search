@@ -32,7 +32,7 @@ class Saved extends Component {
   render () {
     return (
       <>
-        <h1>Saved</h1>
+        {/* <h1>Saved</h1> */}
         {this.state.books.length ? (
           <List>
             {this.state.books.map(book => (

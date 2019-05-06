@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Nav() {
+function Nav () {
   return (
     <>
-      <span className='nav-title'>Google Books</span> <a className='nav-link' href='/search'>Search</a> <a className='nav-link' href='/saved'>Saved</a>
+      <div className='navbar'><span className='nav-title'>Google Books Search</span> <a className='nav-link' href='/search'>Search</a> <a className='nav-link' href='/saved'>Saved</a></div>
     </ >
   );
 }

@@ -1,4 +1,8 @@
 import axios from 'axios'
+
+import * as io from 'socket.io-client'
+const socket = io()
+
 const baseUrl = 'https://www.googleapis.com/books/v1/volumes?q='
 const apiKey = '&key=AIzaSyBnwnrcNwOsL8hcsCgR-0LE-pyvCDE0s5I'
 
@@ -19,8 +23,7 @@ export default {
         const id = response.data.id;
         const { title, authors, description, previewLink } = response.data.volumeInfo;
         const thumbnail = response.data.volumeInfo.imageLinks.thumbnail;
-        // console.log(response.data);
-        // console.log(id, title, authors, description, previewLink, thumbnail);
+        socket.emit('chat message', `<em>${title}</em> was just added to Saved`);
         return axios.post('/api/books', {
           id,
           title,
