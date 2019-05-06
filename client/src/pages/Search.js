@@ -174,7 +174,7 @@ class Search extends Component {
             ))}
           </List>
         ) : (
-            <h3>No Results to Display</h3>
+            <h3 className='no-results'>No Results to Display</h3>
           )}
       </ >
     );

@@ -20,7 +20,7 @@ export default {
         const id = response.data.id;
         const { title, authors, description, previewLink } = response.data.volumeInfo;
         const thumbnail = response.data.volumeInfo.imageLinks.thumbnail;
-        socket.emit('chat message', `<em>${title}</em> was just added to Saved`);
+        socket.emit('chat message', `*** <em>${title}</em> was just added to Saved ***`);
         return axios.post('/api/books', {
           id,
           title,
