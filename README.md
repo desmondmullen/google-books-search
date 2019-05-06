@@ -1,29 +1,11 @@
-# Create React Express App
+# google-books-search
 
-## About This Boilerplate
+**Google Books Search is an exercise in full stack development skills with a focus on React and MongoDB.** I created this for the Coding Boot Camp at UNC-Chapel Hill in May 2019.
 
-This setup allows for a Node/Express/React app which can be easily deployed to Heroku.
+# Features
 
-The front-end React app will auto-reload as it's updated via webpack dev server, and the backend Express app will auto-reload independently with nodemon.
+With Google Books Search, users can easily search, save, and preview the *content* of books with the full power of the Google Books platform.
 
-## Starting the app locally
+In addition to the requirements of the assignment, I expanded the user's search options to Title, Author, and Subject. Users can enter search terms in any or all of those fields. I added a toggling navbar at the top of the page and a toggling "Add to Saved"/"Remove from Saved" button for each book result to instantly orient the user to the status of the app and the books they are viewing.
 
-Start by installing front and backend dependencies. While in this directory, run the following command:
-
-```
-npm install
-```
-
-This should install node modules within the server and the client folder.
-
-After both installations complete, run the following command in your terminal:
-
-```
-npm start
-```
-
-Your app should now be running on <http://localhost:3000>. The Express server should intercept any AJAX requests from the client.
-
-## Deployment (Heroku)
-
-To deploy, simply add and commit your changes, and push to Heroku. As is, the NPM scripts should take care of the rest.
+This application fulfills the bonus requirement of the assignment as well, broadcasting live updates of newly-saved books to any and every browser that is accessing the site. Newly saved book titles appear in a message just below the navbar.
