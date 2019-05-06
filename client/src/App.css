@@ -6,13 +6,11 @@
 }
 
 .nav-title {
-  /* background-color: blue; */
   font-weight: 900;
 }
 
 .nav-link {
   color: white;
-  /* background-color: green; */
   text-decoration: none;
 }
 
