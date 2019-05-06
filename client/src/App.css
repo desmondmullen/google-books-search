@@ -7,7 +7,7 @@
 
 .nav-title {
   /* background-color: blue; */
-  font-weight: bold;
+  font-weight: 900;
 }
 
 .nav-link {
@@ -16,9 +16,8 @@
   text-decoration: none;
 }
 
-h1 {
-  /* margin: 2%; */
-  /* text-align: center; */
+.navbar-links {
+  float: right;
 }
 
 .book-topbar {
@@ -28,7 +27,6 @@ h1 {
 }
 
 .book-title {
-  /* background-color: gray; */
   font-size: x-large;
   font-weight: bold;
   font-style: italic;
@@ -37,7 +35,6 @@ h1 {
 }
 
 .book-author {
-  /* background-color: yellow; */
   font-size: large;
   margin: 0 0 1% 0;
   padding: 0 0.5% 0.5% 1%;
@@ -103,9 +100,9 @@ h1 {
 
 #save-notice {
   text-align: center;
-  font-size: large;
+  font-size: x-large;
   font-weight: bold;
-  color: #808080
+  color: #76ABCC;
 }
 
 .no-results {

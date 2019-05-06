@@ -18,7 +18,8 @@ export default {
     axios.get(theUrl)
       .then(function (response) {
         const id = response.data.id;
-        const { title, authors, description, previewLink } = response.data.volumeInfo;
+        const { title, authors, previewLink } = response.data.volumeInfo;
+        const description = (response.data.volumeInfo.description).replace(/(<([^>]+)>)/ig, "");
         const thumbnail = response.data.volumeInfo.imageLinks.thumbnail;
         socket.emit('chat message', `*** <em>${title}</em> was just added to Saved ***`);
         return axios.post('/api/books', {
